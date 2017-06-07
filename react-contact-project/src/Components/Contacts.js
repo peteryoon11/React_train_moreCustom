@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
 import Detail from './Detail';
+import update from 'react-addons-update';
+//import ContactAdd from './Components/ContactAdd';
+//import ContactAdd from './ContactAdd';
+import ContactAdd from './ContactAdd2';
+
+/*Contancts.defaultProps={
+    contactsData:{name:"",phonenumer:"",addr:""}
+
+}*/
+
+
 class Contancts extends Component {
    
     constructor()
@@ -28,10 +39,36 @@ handleDetail=(idx,dd)=>{
     });
    // console.log(this.state.selectedIndex);
 }
+handleDelete=()=>{
+    console.log("handleDelete");
+//   let result= update(this.state.contactsData,{$merge:[{name:"ddd",phonenumer:"222",addr:"www"}]});
+     let result= update(this.state.contactsData,{$splice:[[this.state.selectedIndex,1]]});
+  
+    console.log(this.state.contactsData);
+  
+    this.setState({
+        contactsData:result
+        //,
+        //selectedIndex:0
+    });
+}
 
+handleSave=(result)=>{
+    console.log("Contact handleSave");
+    console.log(result);
+  /*  this.setState({
+
+    })*/
+
+}
+handleUpdate = (contact)=>{
+    this.setState({
+        contactsData:update(this.state.contactsData, {[this.state.selectedIndex]:{$set:contact}})
+    })
+}
     render() {
         const {itemlist,contactsData} =this.state;
-        const {handleDetail}=this;
+        const {handleDetail,handleDelete,handleSave}=this;
         return (
             <div>
                 <h1>Contancts</h1>
@@ -81,8 +118,10 @@ handleDetail=(idx,dd)=>{
 </table>
 <Detail
 contact={this.state.contactsData[this.state.selectedIndex]}
+onRemove={handleDelete}
 //name={22}
 />
+<ContactAdd mesg={handleSave}/>
             </div>
         );
     }

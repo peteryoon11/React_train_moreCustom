@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Contacts from './Components/Contacts';
 import Detail from './Components/Detail';
+//import ContactAdd from './Components/ContancAdd';
+import ContactAdd from './Components/ContactAdd2';
 
 class Counter extends Component {
   state ={number:0,theNumber:0}
@@ -27,12 +29,15 @@ class Counter extends Component {
  handleClickTest(){
 console.log("div 클릭!!");
  }
-
+handleDelete=()=>{
+  console.log("handleDelete");
+}
 
  
   render() {
     const {number,theNumber} =this.state;
-    const {handleClickUp,handleClickDown,handleClickTest}=this;
+    const {handleClickUp,handleClickDown,handleClickTest
+    ,handleDelete}=this;
     return (
       
       <div onClick={handleClickTest}>
